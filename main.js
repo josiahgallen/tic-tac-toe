@@ -9,8 +9,7 @@ var tie = true;
 var winner = true;
 var forfeit = true;
 var tieCheck = [];
-// var numPlayers = null;
-// var playLappy = true;
+//var numPlayers = 1;
 var numOnBoard = {
     one: '1 1',
     two: '2 1',
@@ -21,7 +20,7 @@ var numOnBoard = {
     seven: '1 3',
     eight: '2 3',
     nine: '3 3'
-}
+};
 var winCheck = {
     col1: '',
     col2: '',
@@ -89,6 +88,17 @@ function boardReset() {
     totalMoves = 0;
     winner = true;
     tie = true;
+    tieCheck = [];
+    winCheck = {
+    col1: '',
+    col2: '',
+    col3: '',
+    row1: '',
+    row2: '',
+    row3: '',
+    diag1: '',
+    diag2: ''
+};
 }
 
 function turn() {
@@ -126,82 +136,130 @@ function turn() {
 
     switch (input) {
         case '1 1':
-            gameBoard[0][0] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[0][0] = move;
-            myTurn = !myTurn;
-            winCheck.col1 += move;
-            winCheck.row1 += move;
-            winCheck.diag1 += move;
-            tieCheck.push('T');
-            totalMoves++;
-            break;
+            if (gameBoard[0][0] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[0][0] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
+            break;   
         case '2 1':
-            gameBoard[1][0] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[1][0] = move;
-            myTurn = !myTurn;
-            winCheck.col2 += move;
-            winCheck.row1 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[1][0] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[1][0] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '3 1':
-            gameBoard[2][0] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[2][0] = move;
-            myTurn = !myTurn;
-            winCheck.col3 += move;
-            winCheck.row1 += move;
-            winCheck.diag2 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[2][0] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[2][0] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '1 2':
-            gameBoard[0][1] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[0][1] = move;
-            myTurn = !myTurn;
-            winCheck.col1 += move;
-            winCheck.row2 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[0][1] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[0][1] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '2 2':
-            gameBoard[1][1] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[1][1] = move;
-            myTurn = !myTurn;
-            winCheck.col2 += move;
-            winCheck.row2 += move;
-            winCheck.diag1 += move;
-            winCheck.diag2 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[1][1] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[1][1] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '3 2':
-            gameBoard[2][1] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[2][1] = move;
-            myTurn = !myTurn;
-            winCheck.col3 += move;
-            winCheck.row2 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[2][1] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[2][1] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '1 3':
-            gameBoard[0][2] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[0][2] = move;
-            myTurn = !myTurn;
-            winCheck.col1 += move;
-            winCheck.row3 += move;
-            winCheck.diag2 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[0][2] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[0][2] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '2 3':
-            gameBoard[1][2] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[1][2] = move;
-            myTurn = !myTurn;
-            winCheck.col2 += move;
-            winCheck.row3 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[1][2] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[1][2] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case '3 3':
-            gameBoard[2][2] !== ' ' ? (console.log('Invalid input: that space is already taken'), turn()) : gameBoard[2][2] = move;
-            myTurn = !myTurn;
-            winCheck.col3 += move;
-            winCheck.row3 += move;
-            winCheck.diag1 += move;
-            tieCheck.push('T');
-            totalMoves++;
+            if (gameBoard[2][2] !== ' ') {
+                console.log('Invalid input: that space is already taken');
+                turn();
+            } else {
+                gameBoard[2][2] = move;
+                myTurn = !myTurn;
+                winCheck.col1 += move;
+                winCheck.row1 += move;
+                winCheck.diag1 += move;
+                tieCheck.push('T');
+                totalMoves++;
+            }
             break;
         case 'outbounds':
             console.log('Input invalid: those coordinates are outside the playable area');
@@ -286,5 +344,14 @@ function play(message) {
     }
 };
 
-
 play();
+
+// function playAI() {
+//     console.log('playlappy');
+// }
+
+// if (numPlayers === 2) {
+// play();
+// } else {
+//     playAI();
+// }
