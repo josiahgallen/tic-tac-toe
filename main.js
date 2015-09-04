@@ -102,7 +102,7 @@ function boardReset() {
 }
 
 function turn() {
-    var currentPlayer = 'lappy';
+    var currentPlayer = '';
     //if (playLappy) {
         if (!myTurn) {
             currentPlayer = player2;
@@ -122,10 +122,10 @@ function turn() {
     // }
 
     console.log(currentPlayer + ' please enter coordinates of for next move... ex:(1 1)');
-    var input = prompt();
+    var input = prompt().toLowerCase();
 
     if (input === 'forfeit') {
-        input = input.toLowerCase();
+        input = input;
     } else if (input.charAt(1) !== ' ' || input.length > 3) {
         input = 'nospaces';
     } else if (input !== numOnBoard.one && input !== numOnBoard.two && input !== numOnBoard.three && input !== numOnBoard.four && input !== numOnBoard.five && input !== numOnBoard.six && input !== numOnBoard.seven && input !== numOnBoard.eight && input !== numOnBoard.nine) {
@@ -156,9 +156,8 @@ function turn() {
             } else {
                 gameBoard[1][0] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
+                winCheck.col2 += move;
                 winCheck.row1 += move;
-                winCheck.diag1 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -170,9 +169,9 @@ function turn() {
             } else {
                 gameBoard[2][0] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
+                winCheck.col3 += move;
                 winCheck.row1 += move;
-                winCheck.diag1 += move;
+                winCheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -185,8 +184,7 @@ function turn() {
                 gameBoard[0][1] = move;
                 myTurn = !myTurn;
                 winCheck.col1 += move;
-                winCheck.row1 += move;
-                winCheck.diag1 += move;
+                winCheck.row2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -198,9 +196,10 @@ function turn() {
             } else {
                 gameBoard[1][1] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
-                winCheck.row1 += move;
+                winCheck.col2 += move;
+                winCheck.row2 += move;
                 winCheck.diag1 += move;
+                winCheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -212,9 +211,8 @@ function turn() {
             } else {
                 gameBoard[2][1] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
-                winCheck.row1 += move;
-                winCheck.diag1 += move;
+                winCheck.col3 += move;
+                winCheck.row2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -227,8 +225,8 @@ function turn() {
                 gameBoard[0][2] = move;
                 myTurn = !myTurn;
                 winCheck.col1 += move;
-                winCheck.row1 += move;
-                winCheck.diag1 += move;
+                winCheck.row3 += move;
+                winCheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -240,9 +238,8 @@ function turn() {
             } else {
                 gameBoard[1][2] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
-                winCheck.row1 += move;
-                winCheck.diag1 += move;
+                winCheck.col2 += move;
+                winCheck.row3 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -254,8 +251,8 @@ function turn() {
             } else {
                 gameBoard[2][2] = move;
                 myTurn = !myTurn;
-                winCheck.col1 += move;
-                winCheck.row1 += move;
+                winCheck.col3 += move;
+                winCheck.row3 += move;
                 winCheck.diag1 += move;
                 tieCheck.push('T');
                 totalMoves++;
