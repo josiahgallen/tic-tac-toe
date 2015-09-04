@@ -8,8 +8,8 @@ var totalMoves = 0;
 var tie = true;
 var winner = true;
 var forfeit = true;
+var no = true;
 var tieCheck = [];
-//var numPlayers = 1;
 var numOnBoard = {
     one: '1 1',
     two: '2 1',
@@ -37,15 +37,11 @@ var gameBoard = [
     [' ', ' ', ' ']
 ];
 
-// function playerCheck() {
-//     console.log('Greetings, Please enter number of Players! (1/2)');
-//     numPlayers = parseInt(prompt());
-//     if (numPlayers === 2) {
-//         return undefined;
-//     } else {
-//         console.log('You can play me! (I\'m pretty good though!)');
-//         playLappy = false;
-//     }
+// function howManyPlayers {
+//     var players = 0;
+//     while (players < )
+//     console.log('Please enter the number of players! (1/2)');
+//     players = 
 // }
 
 function printBoard() {
@@ -103,7 +99,6 @@ function boardReset() {
 
 function turn() {
     var currentPlayer = '';
-    //if (playLappy) {
         if (!myTurn) {
             currentPlayer = player2;
             move = 'O';
@@ -111,15 +106,6 @@ function turn() {
             currentPlayer = player1;
             move = 'X';
         }
-    // } else {
-    //     if (!myTurn) {
-    //         currentPlayer = player1;
-    //         move = 'O';
-    //     } else {
-    //         currentPlayer = AI;
-    //         move = 'X';
-    //     }
-    // }
 
     console.log(currentPlayer + ' please enter coordinates of for next move... ex:(1 1)');
     var input = prompt().toLowerCase();
@@ -282,12 +268,29 @@ function turn() {
 };
 
 function play(message) {
+    var keepPlaying = '';
     if (message !== undefined) {
+        playAgain();
+    } 
+
+    function playAgain () {
         console.log(message);
+        keepPlaying = prompt().toLowerCase();
+        if (keepPlaying !== 'y' && keepPlaying !== 'n') {
+            console.log('Invalid input:(y/n)?')
+            playAgain();
+        } else if (keepPlaying === 'y') {
+            return;
+        } else if (keepPlaying === 'n') {
+            console.log('Thanks for playing.')
+        }
     }
 
-    //playerCheck();
-    //if (playLappy) { 
+    if (keepPlaying === 'n') {
+        no = !no;
+        return;
+    }
+
         console.log('Player 1 enter name please:')
         player1 = prompt().toUpperCase();
         if (player1 === undefined) {
@@ -312,20 +315,6 @@ function play(message) {
             }
             printBoard();
         }
-    // } else {
-    //     console.log('Player 1 enter name please:')
-    //     player2 = prompt().toUpperCase();
-    //     if (player2 === undefined) {
-    //         player2 = 'Player 1';
-    //         player1 = 'Lappy';
-    //     } else if (player2 === 'FORFEIT') {
-    //         player2 = 'Player 1';
-    //         player1 = 'Lappy';
-    //         console.log(player2 + ' forfeits, ' + player1 + ' Wins!');
-    //         forfeit = !forfeit;
-    //     }
-    //     console.log('play lappy');
-    // }
 
     while (forfeit && winner && tie) {
         turn();
@@ -334,21 +323,11 @@ function play(message) {
         isTie();
     };
     boardReset;
-    while (forfeit) {
+    while (forfeit && no) {
         boardReset();
-        play('Do you want to play again? If you want to end the game enter forfeit at any time.');
+        play('Do you want to play again?(y/n) If you want to end the game enter forfeit at any time.');
 
     }
 };
 
 play();
-
-// function playAI() {
-//     console.log('playlappy');
-// }
-
-// if (numPlayers === 2) {
-// play();
-// } else {
-//     playAI();
-// }
