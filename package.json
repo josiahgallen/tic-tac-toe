@@ -1,0 +1,25 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "console tic-tac-toe",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josiahgallen/tic-tac-toe.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Josiah Allen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josiahgallen/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/josiahgallen/tic-tac-toe#readme",
+  "dependencies": {
+    "prompt-sync": "^3.0.0"
+  }
+}
