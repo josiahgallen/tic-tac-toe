@@ -9,6 +9,8 @@ var tie = true;
 var winner = true;
 var forfeit = true;
 var no = true;
+var players = null;
+var compName = 'CPU';
 var tieCheck = [];
 var numOnBoard = {
     one: '1 1',
@@ -37,13 +39,6 @@ var gameBoard = [
     [' ', ' ', ' ']
 ];
 
-// function howManyPlayers {
-//     var players = 0;
-//     while (players < )
-//     console.log('Please enter the number of players! (1/2)');
-//     players = 
-// }
-
 function printBoard() {
     console.log('Current Game Board - Total Moves(' + totalMoves + ')');
     console.log('   1   2   3');
@@ -66,6 +61,16 @@ function isWin() {
             winner = !winner;
         }
     }
+
+    if (players === '1') {
+        for (var key in winCheck) {
+            if (winCheck[key].length === 2) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 };
 
 function isTie() {
@@ -86,38 +91,138 @@ function boardReset() {
     tie = true;
     tieCheck = [];
     winCheck = {
-    col1: '',
-    col2: '',
-    col3: '',
-    row1: '',
-    row2: '',
-    row3: '',
-    diag1: '',
-    diag2: ''
+        col1: '',
+        col2: '',
+        col3: '',
+        row1: '',
+        row2: '',
+        row3: '',
+        diag1: '',
+        diag2: ''
+    };
+    myTurn = !myTurn;
+    player2 = undefined;
 };
+
+function aiMove() {
+    var block = isWin();
+    if (block) {
+        if (winCheck.col1.length === 2) {
+            if (gameBoard[0][0] === ' ') {
+                return '1 1';
+            } else if (gameBoard[0][1] === ' ') {
+                return '1 2';
+            } else {
+                return '1 3'
+            }
+        } else if (winCheck.col2.length === 2) {
+            if (gameBoard[1][0] === ' ') {
+                return '2 1';
+            } else if (gameBoard[1][1] === ' ') {
+                return '2 2';
+            } else {
+                return '2 3'
+            }
+        } else if (winCheck.col3.length === 2) {
+            if (gameBoard[2][0] === ' ') {
+                return '3 1';
+            } else if (gameBoard[2][1] === ' ') {
+                return '3 2';
+            } else {
+                return '3 3'
+            }
+        } else if (winCheck.row1.length === 2) {
+            if (gameBoard[0][0] === ' ') {
+                return '1 1';
+            } else if (gameBoard[1][0] === ' ') {
+                return '2 1';
+            } else {
+                return '3 1'
+            }
+        } else if (winCheck.row2.length === 2) {
+            if (gameBoard[0][1] === ' ') {
+                return '1 2';
+            } else if (gameBoard[1][1] === ' ') {
+                return '2 2';
+            } else {
+                return '3 2';
+            }
+        } else if (winCheck.row3.length === 2) {
+            if (gameBoard[0][2] === ' ') {
+                return '1 3';
+            } else if (gameBoard[1][2] === ' ') {
+                return '2 3';
+            } else {
+                return '3 3'
+            }
+        } else if (winCheck.diag1.length === 2) {
+            if (gameBoard[0][0] === ' ') {
+                return '1 1';
+            } else if (gameBoard[1][1] === ' ') {
+                return '2 2';
+            } else {
+                return '3 3'
+            }
+        } else if (winCheck.diag2.length === 2) {
+            if (gameBoard[2][0] === ' ') {
+                return '3 1';
+            } else if (gameBoard[1][1] === ' ') {
+                return '2 2';
+            } else {
+                return '1 3'
+            }
+        }
+    }
+    if (gameBoard[1][1] === ' '){
+        return '2 2';
+    } else if (gameBoard[0][0] === ' '){
+        return '1 1';
+    } else if (gameBoard[2][0] === ' '){
+        return '3 1';
+    } else if (gameBoard[2][2] === ' '){
+        return '3 3';
+    } else if (gameBoard[0][2] === ' '){
+        return '1 3';
+    } else if (gameBoard[1][0] === ' '){
+        return '2 1';
+    } else if (gameBoard[1][2] === ' '){
+        return '2 3';
+    } else if (gameBoard[2][1] === ' '){
+        return '3 2';
+    }else {
+        return '1 2';
+    }
+    
+
 }
+
 
 function turn() {
     var currentPlayer = '';
-        if (!myTurn) {
-            currentPlayer = player2;
-            move = 'O';
-        } else {
-            currentPlayer = player1;
-            move = 'X';
-        }
-
-    console.log(currentPlayer + ' please enter coordinates of for next move... ex:(1 1)');
-    var input = prompt().toLowerCase();
-
-    if (input === 'forfeit') {
-        input = input;
-    } else if (input.charAt(1) !== ' ' || input.length > 3) {
-        input = 'nospaces';
-    } else if (input !== numOnBoard.one && input !== numOnBoard.two && input !== numOnBoard.three && input !== numOnBoard.four && input !== numOnBoard.five && input !== numOnBoard.six && input !== numOnBoard.seven && input !== numOnBoard.eight && input !== numOnBoard.nine) {
-        input = 'outbounds';
+    var input = '';
+    if (!myTurn) {
+        currentPlayer = player2;
+        move = 'O';
     } else {
-        input = input;
+        currentPlayer = player1;
+        move = 'X';
+    }
+
+    if (currentPlayer === compName) {
+        input = aiMove();
+    } else {
+        console.log(currentPlayer + ' please enter coordinates of for next move... ex:(1 1)');
+        input = prompt().toLowerCase();
+
+        if (input === 'forfeit') {
+            input = input;
+        } else if (input.charAt(1) !== ' ' || input.length > 3) {
+            input = 'nospaces';
+        } else if (input !== numOnBoard.one && input !== numOnBoard.two && input !== numOnBoard.three && input !== numOnBoard.four && input !== numOnBoard.five && input !== numOnBoard.six && input !== numOnBoard.seven && input !== numOnBoard.eight && input !== numOnBoard.nine) {
+            input = 'outbounds';
+        } else {
+            input = input;
+        }
     }
 
     switch (input) {
@@ -134,7 +239,7 @@ function turn() {
                 tieCheck.push('T');
                 totalMoves++;
             }
-            break;   
+            break;
         case '2 1':
             if (gameBoard[1][0] !== ' ') {
                 console.log('Invalid input: that space is already taken');
@@ -271,9 +376,9 @@ function play(message) {
     var keepPlaying = '';
     if (message !== undefined) {
         playAgain();
-    } 
+    }
 
-    function playAgain () {
+    function playAgain() {
         console.log(message);
         keepPlaying = prompt().toLowerCase();
         if (keepPlaying !== 'y' && keepPlaying !== 'n') {
@@ -291,30 +396,44 @@ function play(message) {
         return;
     }
 
-        console.log('Player 1 enter name please:')
-        player1 = prompt().toUpperCase();
-        if (player1 === undefined) {
-            player1 = 'Player 1';
-        } else if (player1 === 'FORFEIT') {
-            if (player2 === undefined) {
-                player2 = 'Player 2';
-            }
-            player1 = 'Player 1';
-            console.log(player1 + ' forfeits, ' + player2 + ' Wins!');
+    function numPlayers() {
+        console.log('How many players? (1/2)');
+        players = prompt();
+        if (players === '2') {
+            return;
+        } else if (players === '1') {
+            player2 = compName;
+        } else {
+            console.log('Invalid Input:');
+            numPlayers();
+        }
+    }
+    numPlayers();
+
+    console.log('Player 1 enter name please:')
+    player1 = prompt().toUpperCase();
+    if (player1 === undefined) {
+        player1 = 'Player 1';
+    } else if (player1 === 'FORFEIT') {
+        if (player2 === undefined) {
+            player2 = 'Player 2';
+        }
+        player1 = 'Player 1';
+        console.log(player1 + ' forfeits, ' + player2 + ' Wins!');
+        forfeit = !forfeit;
+    }
+    if (forfeit && player2 !== compName) {
+        console.log('Player 2 enter name please:')
+        player2 = prompt().toUpperCase();
+        if (player2 === undefined) {
+            player2 = 'Player 2';
+        } else if (player2 === 'FORFEIT') {
+            player2 = 'Player 2';
+            console.log(player2 + ' forfeits, ' + player1 + ' Wins!')
             forfeit = !forfeit;
         }
-        if (forfeit) {
-            console.log('Player 2 enter name please:')
-            player2 = prompt().toUpperCase();
-            if (player2 === undefined) {
-                player2 = 'Player 2';
-            } else if (player2 === 'FORFEIT') {
-                player2 = 'Player 2';
-                console.log(player2 + ' forfeits, ' + player1 + ' Wins!')
-                forfeit = !forfeit;
-            }
-            printBoard();
-        }
+    }
+    printBoard();
 
     while (forfeit && winner && tie) {
         turn();
