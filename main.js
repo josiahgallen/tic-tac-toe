@@ -1,8 +1,8 @@
 var prompt = require('prompt-sync').prompt;
 /*-----------------------------------------*/
 var move = null;
-var player1 = undefined;
-var player2 = undefined;
+var player1 = '';
+var player2 = '';
 var myTurn = true;
 var totalMoves = 0;
 var tie = true;
@@ -111,7 +111,8 @@ function boardReset() {
     diag2: ''
 };
     myTurn = !myTurn;
-    player2 = undefined;
+    player1 = '';
+    player2 = '';
 };
 
 function aiMove() {
@@ -440,10 +441,10 @@ function play(message) {
 
     console.log('Player 1 enter name please:')
     player1 = prompt().toUpperCase();
-    if (player1 === undefined) {
+    if (player1 === '') {
         player1 = 'Player 1';
     } else if (player1 === 'FORFEIT') {
-        if (player2 === undefined) {
+        if (player2 === '') {
             player2 = 'Player 2';
         }
         player1 = 'Player 1';
@@ -453,7 +454,7 @@ function play(message) {
     if (forfeit && player2 !== compName) {
         console.log('Player 2 enter name please:')
         player2 = prompt().toUpperCase();
-        if (player2 === undefined) {
+        if (player2 === '') {
             player2 = 'Player 2';
         } else if (player2 === 'FORFEIT') {
             player2 = 'Player 2';
