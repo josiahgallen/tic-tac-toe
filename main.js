@@ -62,13 +62,25 @@ function printBoard() {
 };
 
 function isWin() {
-    for (var key in winCheck) {
-        if (winCheck[key] === 'XXX') {
-            console.log('Congratulations! ' + player1 + ' WINS!')
-            winner = !winner;
-        } else if (winCheck[key] === 'OOO') {
-            console.log('Congratulations! ' + player2 + ' WINS!')
-            winner = !winner;
+    if (players > 1) {
+        for (var key in winCheck) {
+            if (winCheck[key] === 'XXX') {
+                console.log('Congratulations! ' + player1 + ' WINS!')
+                winner = !winner;
+            } else if (winCheck[key] === 'OOO') {
+                console.log('Congratulations! ' + player2 + ' WINS!')
+                winner = !winner;
+            }
+        }
+    } else {
+        for (var key in winCheck) {
+            if (winCheck[key] === 'XXX') {
+                console.log('Congratulations! ' + player1 + ' WINS!')
+                winner = !winner;
+            } else if (winCheck[key] === 'OOO') {
+                console.log('Sorry, ' + compName + ' WINS!')
+                winner = !winner;
+            }
         }
     }
 };
@@ -101,15 +113,15 @@ function boardReset() {
         diag2: ''
     };
     compOcheck = {
-    col1: '',
-    col2: '',
-    col3: '',
-    row1: '',
-    row2: '',
-    row3: '',
-    diag1: '',
-    diag2: ''
-};
+        col1: '',
+        col2: '',
+        col3: '',
+        row1: '',
+        row2: '',
+        row3: '',
+        diag1: '',
+        diag2: ''
+    };
     myTurn = !myTurn;
     player1 = '';
     player2 = '';
@@ -153,7 +165,7 @@ function aiMove() {
             return '1 2';
         } else if (gameBoard[1][1] === ' ') {
             return '2 2';
-        } else if (gameBoard[2][1] === ' '){
+        } else if (gameBoard[2][1] === ' ') {
             return '3 2';
         }
     } else if (compOcheck.row3 === 'OO' || winCheck.row3 === 'XX') {
@@ -214,6 +226,7 @@ function turn() {
     }
 
     if (currentPlayer === compName) {
+        console.log(compName + ': \'I have already choosen... what are you waiting for?\'')
         input = aiMove();
     } else {
         console.log(currentPlayer + ' please enter coordinates of for next move... ex:(1 1)');
@@ -476,5 +489,5 @@ function play(message) {
 
     }
 };
-//
+
 play();
