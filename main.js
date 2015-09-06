@@ -440,7 +440,7 @@ function play(message) {
     numPlayers();
 
     console.log('Player 1 enter name please:')
-    player1 = prompt().toUpperCase();
+    player1 = prompt().toUpperCase().trim();
     if (player1 === '') {
         player1 = 'Player 1';
     } else if (player1 === 'FORFEIT') {
@@ -453,7 +453,7 @@ function play(message) {
     }
     if (forfeit && player2 !== compName) {
         console.log('Player 2 enter name please:')
-        player2 = prompt().toUpperCase();
+        player2 = prompt().toUpperCase().trim();
         if (player2 === '') {
             player2 = 'Player 2';
         } else if (player2 === 'FORFEIT') {
@@ -476,5 +476,5 @@ function play(message) {
 
     }
 };
-
+//
 play();
