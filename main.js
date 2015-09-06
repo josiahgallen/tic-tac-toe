@@ -33,6 +33,16 @@ var winCheck = {
     diag1: '',
     diag2: ''
 };
+var compOcheck = {
+    col1: '',
+    col2: '',
+    col3: '',
+    row1: '',
+    row2: '',
+    row3: '',
+    diag1: '',
+    diag2: ''
+};
 var gameBoard = [
     [' ', ' ', ' '],
     [' ', ' ', ' '],
@@ -59,16 +69,6 @@ function isWin() {
         } else if (winCheck[key] === 'OOO') {
             console.log('Congratulations! ' + player2 + ' WINS!')
             winner = !winner;
-        }
-    }
-
-    if (players === '1') {
-        for (var key in winCheck) {
-            if (winCheck[key].length === 2) {
-                return true;
-            } else {
-                return false;
-            }
         }
     }
 };
@@ -100,102 +100,106 @@ function boardReset() {
         diag1: '',
         diag2: ''
     };
+    compOcheck = {
+    col1: '',
+    col2: '',
+    col3: '',
+    row1: '',
+    row2: '',
+    row3: '',
+    diag1: '',
+    diag2: ''
+};
     myTurn = !myTurn;
     player2 = undefined;
 };
 
 function aiMove() {
-    var block = isWin();
-    if (block) {
-        if (winCheck.col1.length === 2) {
-            if (gameBoard[0][0] === ' ') {
-                return '1 1';
-            } else if (gameBoard[0][1] === ' ') {
-                return '1 2';
-            } else {
-                return '1 3'
-            }
-        } else if (winCheck.col2.length === 2) {
-            if (gameBoard[1][0] === ' ') {
-                return '2 1';
-            } else if (gameBoard[1][1] === ' ') {
-                return '2 2';
-            } else {
-                return '2 3'
-            }
-        } else if (winCheck.col3.length === 2) {
-            if (gameBoard[2][0] === ' ') {
-                return '3 1';
-            } else if (gameBoard[2][1] === ' ') {
-                return '3 2';
-            } else {
-                return '3 3'
-            }
-        } else if (winCheck.row1.length === 2) {
-            if (gameBoard[0][0] === ' ') {
-                return '1 1';
-            } else if (gameBoard[1][0] === ' ') {
-                return '2 1';
-            } else {
-                return '3 1'
-            }
-        } else if (winCheck.row2.length === 2) {
-            if (gameBoard[0][1] === ' ') {
-                return '1 2';
-            } else if (gameBoard[1][1] === ' ') {
-                return '2 2';
-            } else {
-                return '3 2';
-            }
-        } else if (winCheck.row3.length === 2) {
-            if (gameBoard[0][2] === ' ') {
-                return '1 3';
-            } else if (gameBoard[1][2] === ' ') {
-                return '2 3';
-            } else {
-                return '3 3'
-            }
-        } else if (winCheck.diag1.length === 2) {
-            if (gameBoard[0][0] === ' ') {
-                return '1 1';
-            } else if (gameBoard[1][1] === ' ') {
-                return '2 2';
-            } else {
-                return '3 3'
-            }
-        } else if (winCheck.diag2.length === 2) {
-            if (gameBoard[2][0] === ' ') {
-                return '3 1';
-            } else if (gameBoard[1][1] === ' ') {
-                return '2 2';
-            } else {
-                return '1 3'
-            }
+    if (compOcheck.col1 === 'OO' || winCheck.col1 === 'XX') {
+        if (gameBoard[0][0] === ' ') {
+            return '1 1';
+        } else if (gameBoard[0][1] === ' ') {
+            return '1 2';
+        } else {
+            return '1 3';
+        }
+    } else if (compOcheck.col2 === 'OO' || winCheck.col2 === 'XX') {
+        if (gameBoard[1][0] === ' ') {
+            return '2 1';
+        } else if (gameBoard[1][1] === ' ') {
+            return '2 2';
+        } else {
+            return '2 3';
+        }
+    } else if (compOcheck.col3 === 'OO' || winCheck.col3 === 'XX') {
+        if (gameBoard[2][0] === ' ') {
+            return '3 1';
+        } else if (gameBoard[2][1] === ' ') {
+            return '3 2';
+        } else {
+            return '3 3';
+        }
+    } else if (compOcheck.row1 === 'OO' || winCheck.row1 === 'XX') {
+        if (gameBoard[0][0] === ' ') {
+            return '1 1';
+        } else if (gameBoard[1][0] === ' ') {
+            return '2 1';
+        } else {
+            return '3 1';
+        }
+    } else if (compOcheck.row2 === 'OO' || winCheck.row2 === 'XX') {
+        if (gameBoard[0][1] === ' ') {
+            return '1 2';
+        } else if (gameBoard[1][1] === ' ') {
+            return '2 2';
+        } else if (gameBoard[2][1] === ' '){
+            return '3 2';
+        }
+    } else if (compOcheck.row3 === 'OO' || winCheck.row3 === 'XX') {
+        if (gameBoard[0][2] === ' ') {
+            return '1 3';
+        } else if (gameBoard[1][2] === ' ') {
+            return '2 3';
+        } else {
+            return '3 3';
+        }
+    } else if (compOcheck.diag1 === 'OO' || winCheck.diag1 === 'XX') {
+        if (gameBoard[0][0] === ' ') {
+            return '1 1';
+        } else if (gameBoard[1][1] === ' ') {
+            return '2 2';
+        } else {
+            return '3 3';
+        }
+    } else if (compOcheck.diag2 === 'OO' || winCheck.diag2 === 'XX') {
+        if (gameBoard[2][0] === ' ') {
+            return '3 1';
+        } else if (gameBoard[1][1] === ' ') {
+            return '2 2';
+        } else {
+            return '1 3';
         }
     }
-    if (gameBoard[1][1] === ' '){
+    if (gameBoard[1][1] === ' ') {
         return '2 2';
-    } else if (gameBoard[0][0] === ' '){
+    } else if (gameBoard[0][0] === ' ') {
         return '1 1';
-    } else if (gameBoard[2][0] === ' '){
+    } else if (gameBoard[2][0] === ' ') {
         return '3 1';
-    } else if (gameBoard[2][2] === ' '){
+    } else if (gameBoard[2][2] === ' ') {
         return '3 3';
-    } else if (gameBoard[0][2] === ' '){
+    } else if (gameBoard[0][2] === ' ') {
         return '1 3';
-    } else if (gameBoard[1][0] === ' '){
+    } else if (gameBoard[1][0] === ' ') {
         return '2 1';
-    } else if (gameBoard[1][2] === ' '){
+    } else if (gameBoard[1][2] === ' ') {
         return '2 3';
-    } else if (gameBoard[2][1] === ' '){
+    } else if (gameBoard[2][1] === ' ') {
         return '3 2';
-    }else {
+    } else {
         return '1 2';
     }
-    
-
 }
-
 
 function turn() {
     var currentPlayer = '';
@@ -236,6 +240,9 @@ function turn() {
                 winCheck.col1 += move;
                 winCheck.row1 += move;
                 winCheck.diag1 += move;
+                compOcheck.col1 += move;
+                compOcheck.row1 += move;
+                compOcheck.diag1 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -249,6 +256,8 @@ function turn() {
                 myTurn = !myTurn;
                 winCheck.col2 += move;
                 winCheck.row1 += move;
+                compOcheck.col2 += move;
+                compOcheck.row1 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -263,6 +272,9 @@ function turn() {
                 winCheck.col3 += move;
                 winCheck.row1 += move;
                 winCheck.diag2 += move;
+                compOcheck.col3 += move;
+                compOcheck.row1 += move;
+                compOcheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -276,6 +288,8 @@ function turn() {
                 myTurn = !myTurn;
                 winCheck.col1 += move;
                 winCheck.row2 += move;
+                compOcheck.col1 += move;
+                compOcheck.row2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -291,6 +305,10 @@ function turn() {
                 winCheck.row2 += move;
                 winCheck.diag1 += move;
                 winCheck.diag2 += move;
+                compOcheck.col2 += move;
+                compOcheck.row2 += move;
+                compOcheck.diag1 += move;
+                compOcheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -304,6 +322,8 @@ function turn() {
                 myTurn = !myTurn;
                 winCheck.col3 += move;
                 winCheck.row2 += move;
+                compOcheck.col3 += move;
+                compOcheck.row2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -318,6 +338,9 @@ function turn() {
                 winCheck.col1 += move;
                 winCheck.row3 += move;
                 winCheck.diag2 += move;
+                compOcheck.col1 += move;
+                compOcheck.row3 += move;
+                compOcheck.diag2 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -331,6 +354,8 @@ function turn() {
                 myTurn = !myTurn;
                 winCheck.col2 += move;
                 winCheck.row3 += move;
+                compOcheck.col2 += move;
+                compOcheck.row3 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -345,6 +370,9 @@ function turn() {
                 winCheck.col3 += move;
                 winCheck.row3 += move;
                 winCheck.diag1 += move;
+                compOcheck.col3 += move;
+                compOcheck.row3 += move;
+                compOcheck.diag1 += move;
                 tieCheck.push('T');
                 totalMoves++;
             }
@@ -441,7 +469,6 @@ function play(message) {
         isWin();
         isTie();
     };
-    boardReset;
     while (forfeit && no) {
         boardReset();
         play('Do you want to play again?(y/n) If you want to end the game enter forfeit at any time.');
